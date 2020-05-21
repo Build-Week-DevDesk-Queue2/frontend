@@ -1,5 +1,6 @@
 import React from "react";
 import axios from "axios";
+import styled from "styled-components";
 import OpenTickets from "./OpenTickets";
 import ClosedTickets from "./ClosedTickets";
 import {
@@ -7,27 +8,21 @@ import {
   Route,
   Link,
   NavLink,
-  useRouteMatch,
+  Switch,
 } from "react-router-dom";
 
 const StudentQueue = () => {
   return (
-    <nav>
-      <Router>
-        <Route path="/open-tickets" component={OpenTickets}>
-          <Link to="/open-tickets" component={OpenTickets}>
-            Open Tickets
-          </Link>
-          <Link to="/closed-tickets">Closed Tickets</Link>
-        </Route>
-        <Route path="/closed-tickets" component={ClosedTickets}>
-          <Link to="/closed-tickets" component={ClosedTickets}>
-            Closed Tickets
-          </Link>
-          <Link to="/open-tickets">Open Tickets</Link>
-        </Route>
-      </Router>
-    </nav>
+    <Router>
+      <nav>
+        <NavLink to="/open-tickets">Open Tickets</NavLink>
+        <NavLink to="/closed-tickets">Closed Tickets</NavLink>
+      </nav>
+      <Switch>
+        <Route path="/open-tickets" component={OpenTickets} />
+        <Route path="/closed-tickets" component={ClosedTickets} />
+      </Switch>
+    </Router>
   );
 };
 

@@ -23,5 +23,5 @@ const BackgroundWrap = styled.div`
   margin-top: -430px;
   margin-left: -600px;
   width: 960px;
-  padding: 30px 130px 10px 120px;
+  padding: 30px 130px 0px 120px;
 `;
