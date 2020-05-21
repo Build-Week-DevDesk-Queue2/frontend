@@ -12,7 +12,7 @@ const Login = () => {
   return (
     <div className="create-account-form">
       <BackgroundWrap>
-        <CreateAccountHeading>LOGIN</CreateAccountHeading>
+        <LoginHeading>LOGIN</LoginHeading>
         <form>
           <label htmlFor="email">
             {/* EMAIL */}
@@ -45,7 +45,7 @@ const Login = () => {
 /// STYLED COMPONENTS ///
 /////////////////////////
 
-const CreateAccountHeading = styled.span`
+const LoginHeading = styled.span`
   color: #333333;
   font-weight: 800;
   font-size: 24px;
@@ -54,18 +54,6 @@ const CreateAccountHeading = styled.span`
   display: block;
   padding-bottom: 25px;
   margin: 0 0 0 5%;
-`;
-
-const CreateAccountSubHeading = styled.span`
-  color: #333333;
-  font-weight: 300;
-  font-size: 18px;
-  line-height: 1.2;
-  text-align: center;
-  display: block;
-  width: 330px;
-  margin: 0 35%;
-  padding-bottom: 25px;
 `;
 
 const BackgroundWrap = styled.div`
