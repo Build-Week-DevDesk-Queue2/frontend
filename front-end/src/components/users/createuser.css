@@ -5,9 +5,7 @@ html {
 .App {
   width: 100%;
   min-height: 100vh;
-  background: #9053c7;
-  background: -webkit-linear-gradient(-135deg, #c850c0, #4158d0);
-  background: linear-gradient(-135deg, #c850c0, #4158d0);
+  background: #f9fafb;
   font-family: sans-serif;
   text-align: center;
 }
@@ -28,8 +26,7 @@ label {
 }
 
 input,
-select,
-textarea {
+select {
   height: 25px;
   width: 100%;
   margin: 5px 0 0;
@@ -66,9 +63,11 @@ input:placeholder {
 
 input[type="checkbox"] {
   margin-left: 15px;
+  display: inline-block;
 }
 
 button {
+  margin: 0 2%;
   height: 45px;
   width: 100%;
   display: inline-block;
@@ -79,38 +78,31 @@ button {
   border-radius: 25px;
   letter-spacing: 2px;
   outline: none;
-  background-color: #57b846;
-  color: #fff;
+  background-color: #efefef;
+  color: #3b394e;
   cursor: pointer;
   box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
 }
 
 button:hover {
   background-image: none;
-  background-color: #212529;
+  background-color: #d7d7d7;
   box-shadow: 0 5px 12px rgba(0, 0, 0, 0.3);
 }
-
-/* button:disabled {
-    background-image: none;
-    background-color: white;
-    border: 1px solid rgba(0, 0, 0, 0.1);
-    color: rgba(0, 0, 0, 0.1);
-    cursor: not-allowed;
-  } */
 
 .error {
   font-size: 1.2rem;
   color: red;
 }
 
-.terms {
-  display: inline-block;
-  align-self: self-start;
+.role {
+  display: flex;
+  /*align-self: self-start;*/
 }
 
-.terms input {
-  width: 15px;
+.role input {
+  /*width: 15px;*/
+  width: 100%;
   display: inline-block;
   margin-right: 5px;
 }
