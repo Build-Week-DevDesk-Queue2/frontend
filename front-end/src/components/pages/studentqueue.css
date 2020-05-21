@@ -1,0 +1,44 @@
+html {
+  font-size: 62.5%;
+}
+
+.App {
+  width: 100%;
+  min-height: 100vh;
+  background: #f9fafb;
+  font-family: sans-serif;
+  text-align: center;
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+  width: 960px;
+  max-width: 300px;
+  margin: 0 auto;
+}
+
+nav a {
+  text-decoration: none;
+  background: #f9fafc;
+  color: black;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 16px;
+  line-height: 20px;
+  padding: 1% 5%;
+}
+
+nav a:focus {
+  font-weight: 600;
+}
+
+nav a:selected {
+  text-decoration: none;
+  background: #f9fafc;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 16px;
+  line-height: 20px;
+  padding: 1% 5%;
+}
