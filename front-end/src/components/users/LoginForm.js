@@ -8,19 +8,12 @@ import "./createuser.css";
 ///       FORM        ///
 /////////////////////////
 
-const CreateUserForm = () => {
+const Login = () => {
   return (
     <div className="create-account-form">
       <BackgroundWrap>
-        <CreateAccountHeading>We're Here to help.</CreateAccountHeading>
-        <CreateAccountSubHeading>
-          Create an account to start receiving help!
-        </CreateAccountSubHeading>
+        <CreateAccountHeading>LOGIN</CreateAccountHeading>
         <form>
-          <label htmlFor="name">
-            {/* NAME */}
-            <input className="input" id="name" type="text" placeholder="Name" />
-          </label>
           <label htmlFor="email">
             {/* EMAIL */}
             <input
@@ -41,14 +34,7 @@ const CreateUserForm = () => {
               placeholder="Password"
             />
           </label>
-          <label htmlFor="role" className="role">
-            My Role:
-            <input type="checkbox" id="student" name="role" value="student" />
-            <label htmlFor="role">Student</label>
-            <input type="checkbox" id="helper" name="role" value="helper" />
-            <label htmlFor="role">Helper</label>
-          </label>
-          <button type="submit">Create Account</button>
+          <button type="submit">LOG IN</button>
         </form>
       </BackgroundWrap>
     </div>
@@ -94,4 +80,4 @@ const BackgroundWrap = styled.div`
   padding: 30px 130px 130px 95px;
 `;
 
-export default CreateUserForm;
+export default Login;
