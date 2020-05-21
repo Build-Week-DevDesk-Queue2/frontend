@@ -1,9 +1,13 @@
 import React from "react";
-import logo from "./logo.svg";
 import "./App.css";
+import CreateUserForm from "./components/users/CreateUserForm";
 
 function App() {
-  return <div className="App"></div>;
+  return (
+    <div className="App">
+      <CreateUserForm />
+    </div>
+  );
 }
 
 export default App;
