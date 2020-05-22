@@ -6,7 +6,7 @@ import StudentQueue from "../que/StudentQueue";
 const StudentSuccessPage = () => {
   return (
     <BackgroundWrap>
-      <h1>My Queue</h1>
+      <MyQueue>My Queue</MyQueue>
       <StudentQueue />
     </BackgroundWrap>
   );
@@ -15,7 +15,6 @@ const StudentSuccessPage = () => {
 export default StudentSuccessPage;
 
 const BackgroundWrap = styled.div`
-  background: #fff;
   border-radius: 10px;
   position: fixed;
   top: 50%;
@@ -24,4 +23,9 @@ const BackgroundWrap = styled.div`
   margin-left: -600px;
   width: 960px;
   padding: 30px 130px 0px 120px;
+`;
+
+const MyQueue = styled.h1`
+  background: #fff;
+  padding-top: 5%;
 `;

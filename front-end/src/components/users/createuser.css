@@ -22,14 +22,18 @@ label {
   display: flow-root;
   align-items: flex-start;
   margin: 10px 0;
-  font-size: 1.4rem;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 20px;
+  text-align: start;
 }
 
 input,
 select {
   height: 25px;
   width: 100%;
-  margin: 5px 0 0 4%;
+  margin: 5px 0 0 0;
   display: block;
   width: 100%;
   border: 2px solid rgba(0, 0, 0, 0.2);
@@ -42,6 +46,23 @@ select {
   background: #e6e6e6;
   border-radius: 25px;
 }
+
+textarea {
+  width: 100%;
+  margin: 5px 0 0 0;
+  display: block;
+  width: 100%;
+  border: 2px solid rgba(0, 0, 0, 0.2);
+  border-radius: 5px;
+  padding: 10px;
+  transition: all 0.3s;
+  font-size: 1.4rem;
+  letter-spacing: 0.5px;
+  background-color: white;
+  background: #e6e6e6;
+  border-radius: 25px;
+}
+
 select {
   height: 40px;
   width: 325px;
@@ -52,12 +73,14 @@ select:focus {
   border-color: #1ee7e2;
 }
 
-input:focus {
+input:focus,
+textarea:focus {
   outline: none;
   border-color: rgba(87, 184, 70, 0.8);
 }
 
-input:placeholder {
+input:placeholder,
+textarea:placeholder {
   color: #a8b2b2;
 }
 
@@ -67,7 +90,7 @@ input[type="checkbox"] {
 }
 
 button {
-  margin: 5% 7%;
+  margin: 5% 5%;
   height: 45px;
   width: 100%;
   display: inline-block;
@@ -135,4 +158,8 @@ h2 span {
   color: #646378;
   padding: 0 10px;
   margin-left: 1%;
+}
+
+.fa-notes-medical:after {
+  display: none;
 }
