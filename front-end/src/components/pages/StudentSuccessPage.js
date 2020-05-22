@@ -19,7 +19,7 @@ const BackgroundWrap = styled.div`
   position: fixed;
   top: 50%;
   left: 50%;
-  margin-top: -430px;
+  margin-top: -460px;
   margin-left: -600px;
   width: 960px;
   padding: 30px 130px 0px 120px;

@@ -86,7 +86,7 @@ const BackgroundWrap = styled.div`
 `;
 
 const StyledLink = styled(Link)`
-  margin: 5% 7%;
+  margin: 5% 5%;
   width: 100%;
   display: inline-block;
   padding: 15px 0px;

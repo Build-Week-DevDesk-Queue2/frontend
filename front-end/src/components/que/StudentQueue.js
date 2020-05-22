@@ -4,7 +4,6 @@ import styled from "styled-components";
 import OpenTickets from "./OpenTickets";
 import ClosedTickets from "./ClosedTickets";
 import TicketForm from "./TicketForm";
-
 import {
   BrowserRouter as Router,
   Route,

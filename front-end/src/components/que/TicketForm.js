@@ -5,12 +5,13 @@ const TicketForm = () => {
   return (
     <BackgroundWrap>
       <form>
+        <CloseButton className="far fa-times-circle"></CloseButton>
         <HeadingContainer>
           <TicketHeading>Let's submit a help ticket.</TicketHeading>
           <RequiredSpan>* Required Fields</RequiredSpan>
         </HeadingContainer>
-        <label htmlFor="title">
-          What's going on? *
+        <label htmlFor="title" class="required">
+          What's going on?
           <input
             className="input"
             id="title"
@@ -19,9 +20,20 @@ const TicketForm = () => {
             placeholder="Add a Title..."
           />
         </label>
-        <label htmlFor="issue">
+        <label htmlFor="issue" class="required">
           What is this issue about? *
           <input className="input" id="issue" type="issue" name="issue" />
+        </label>
+        <label htmlFor="aboutissue" class="required">
+          What is this issue about? *
+          <select id="aboutissue" name="aboutissue">
+            <option>Select Issue</option>
+            <option value="equipment">Equipment</option>
+            <option value="people">People</option>
+            <option value="track">Track</option>
+            <option value="finances">Finances</option>
+            <option value="Other">Other</option>
+          </select>
         </label>
         <label htmlFor="effort">
           What have you tried? *
@@ -64,7 +76,6 @@ const BackgroundWrap = styled.div`
 
 const RequiredSpan = styled.span`
   position: absolute;
-  top: 8%;
   left: 37.5%;
 `;
 
@@ -74,6 +85,13 @@ const TicketHeading = styled.h1`
 
 const HeadingContainer = styled.div`
   margin-bottom: 10%;
+`;
+
+const CloseButton = styled.i`
+  position: absolute;
+  top: 5%;
+  left: 63%;
+  font-size: 18px;
 `;
 
 export default TicketForm;
