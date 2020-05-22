@@ -90,6 +90,12 @@ button:hover {
   box-shadow: 0 5px 12px rgba(0, 0, 0, 0.3);
 }
 
+a:hover {
+  background-image: none;
+  background-color: #d7d7d7;
+  box-shadow: 0 5px 12px rgba(0, 0, 0, 0.3);
+}
+
 .error {
   font-size: 1.2rem;
   color: red;
