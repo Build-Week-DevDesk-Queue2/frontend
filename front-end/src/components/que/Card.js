@@ -10,8 +10,10 @@ const Card = () => {
         <StyledParagraphTitle>Laptop stopped working</StyledParagraphTitle>
         <div className="open-ticket-tried-section">
           <h4>What you've tried</h4>
-          <p>Reboot</p>
-          <p>Apple Genius Bar</p>
+          <ul>
+            <li>Reboot</li>
+            <li>Apple Genius Bar</li>
+          </ul>
         </div>
         <div className="open-ticket-info-section">
           <h4>More Info</h4>
@@ -49,6 +51,7 @@ const StyledParagraphTitle = styled.p`
   font-weight: 600;
   font-size: 21px;
   line-height: 26px;
+  margin-top: 0;
 `;
 
 export default Card;
