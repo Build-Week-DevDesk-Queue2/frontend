@@ -90,7 +90,7 @@ input[type="checkbox"] {
 }
 
 button {
-  margin: 5% 5%;
+  margin: 5% 4%;
   height: 45px;
   width: 100%;
   display: inline-block;
@@ -158,4 +158,25 @@ h2 span {
   color: #646378;
   padding: 0 10px;
   margin-left: 1%;
+}
+
+div .open-ticket-tried-section h4 {
+  font-weight: 600;
+  font-size: 18px;
+  line-height: 23px;
+}
+
+div .open-ticket-tried-section p {
+  font-size: 14px;
+  line-height: 20px;
+}
+
+div .open-ticket-info-section p {
+  font-size: 14px;
+  line-height: 20px;
+}
+
+.ticket-card {
+  margin-top: 2%;
+  margin-left: 2%;
 }

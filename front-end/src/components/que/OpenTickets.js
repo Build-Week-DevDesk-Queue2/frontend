@@ -1,10 +1,11 @@
 import React from "react";
 import styled from "styled-components";
+import Card from "../que/Card";
 
 const OpenTickets = () => {
   return (
     <div>
-      <h1>Open Tickets</h1>
+      <Card />
     </div>
   );
 };

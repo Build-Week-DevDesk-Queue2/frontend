@@ -1,11 +1,17 @@
 import React from "react";
+import { useHistory } from "react-router-dom";
 import styled from "styled-components";
 
 const TicketForm = () => {
+  let history = useHistory();
+
   return (
     <BackgroundWrap>
       <form>
-        <CloseButton className="far fa-times-circle"></CloseButton>
+        <CloseButton
+          onClick={() => history.goBack()}
+          className="far fa-times-circle"
+        ></CloseButton>
         <HeadingContainer>
           <TicketHeading>Let's submit a help ticket.</TicketHeading>
           <RequiredSpan>* Required Fields</RequiredSpan>

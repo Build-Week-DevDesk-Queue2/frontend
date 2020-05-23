@@ -47,7 +47,7 @@ const Login = () => {
             <span>or</span>
           </h2>
           <Router>
-            <StyledLink className="hover" to="/sign-up">
+            <StyledLink className="signin" to="/sign-up">
               Create an Account
             </StyledLink>
             <Route path="/sign-up" component={CreateUserForm} />
