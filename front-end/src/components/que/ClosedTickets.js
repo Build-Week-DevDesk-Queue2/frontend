@@ -1,9 +1,10 @@
 import React from "react";
+import ClosedCard from "./ClosedCard";
 
 const ClosedTickets = () => {
   return (
     <div>
-      <h1>Closed Tickets</h1>
+      <ClosedCard />
     </div>
   );
 };
