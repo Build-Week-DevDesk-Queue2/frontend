@@ -28,15 +28,10 @@ const Card = () => {
 };
 
 const CardWrap = styled.div`
-  display: flex;
-  flex-direction: column;
   text-align: left;
   width: 350px;
   height: auto;
-  left: 35%;
-  top: 200px;
   background: #ffffff;
-  position: absolute;
   box-shadow: 2px 4px 10px rgba(0, 0, 0, 0.02), 2px 3px 8px rgba(0, 0, 0, 0.02);
   border-radius: 5px;
   border-left: 8px solid #007aff;

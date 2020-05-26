@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import {
   BrowserRouter as Router,
   Route,
@@ -17,6 +17,65 @@ import "./createuser.css";
 /////////////////////////
 
 const Login = () => {
+  ////////////////////////
+  ///      STATE      ///
+  ///////////////////////
+
+  // Initial state for the Login form
+  const initialFormState = {
+    email: "",
+    password: "",
+  };
+
+  // State for inputs
+  const [formState, setFormState] = useState(initialFormState);
+
+  // State for errors
+  const [errors, setErrors] = useState(initialFormState);
+
+  ////////////////////////
+  ///     VALIDATION   ///
+  ////////////////////////
+
+  // FORM SCHEMA Validation for Login Page
+  const formSchema = yup.object().shape({
+    email: yup.string().email("Must be a valid email address").required(),
+    password: yup.string().required("Password is a required field"),
+  });
+
+  // Validation for each input
+  const validateChange = (e) => {
+    yup
+      // Read the value of schema key using name of input
+      .reach(formSchema, e.target.name)
+      // Validate the value of input
+      .validate(e.target.value)
+      // If the validation passes, clear all errors
+      .then((valid) => {
+        setErrors({ ...errors, [e.target.name]: "" });
+      })
+      .catch((err) => {
+        setErrors({ ...errors, [e.target.name]: err.errors[0] });
+      });
+  };
+
+  ////////////////////////
+  /// INPUT ONCHANGE   ///
+  ////////////////////////
+  const inputChange = (e) => {
+    e.persist();
+    const newFormData = {
+      ...formState,
+      [e.target.name]: e.target.value,
+    };
+    validateChange(e); // Validates every change in every input
+    setFormState(newFormData); // Update state with new data
+  };
+
+  ////////////////////////
+  ///     ON SUBMIT    ///
+  ////////////////////////
+
   return (
     <div className="create-account-form">
       <BackgroundWrap>
@@ -30,7 +89,12 @@ const Login = () => {
               type="email"
               name="email"
               placeholder="Email"
+              onChange={inputChange}
+              value={formState.email}
             />
+            {errors.email.length > 0 ? (
+              <p className="error">{errors.email}</p>
+            ) : null}
           </label>
           <label htmlFor="password">
             {/* PASSWORD */}
@@ -40,7 +104,12 @@ const Login = () => {
               type="password"
               name="password"
               placeholder="Password"
+              onChange={inputChange}
+              value={formState.password}
             />
+            {errors.password.length > 0 ? (
+              <p className="error">{errors.password}</p>
+            ) : null}
           </label>
           <button type="submit">LOG IN</button>
           <h2>

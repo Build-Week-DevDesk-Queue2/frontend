@@ -4,11 +4,17 @@ import Card from "./Card";
 
 const OpenTickets = () => {
   return (
-    <div>
+    <ListCard>
       <Card />
-    </div>
+    </ListCard>
   );
 };
+
+const ListCard = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+`;
 
 const BackgroundWrap = styled.div`
   background: #fff;
