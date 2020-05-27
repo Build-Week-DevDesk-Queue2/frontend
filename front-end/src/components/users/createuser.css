@@ -205,3 +205,13 @@ div .open-ticket-info-section p {
   align-items: center;
   justify-content: space-between;
 }
+
+.success-message {
+  margin-top: 10px;
+  background-color: #0ea939;
+  width: 250px;
+  border-radius: 20px;
+  padding: 5px;
+  display: inline-block;
+  margin-bottom: 20px;
+}

@@ -3,6 +3,7 @@ import { useHistory } from "react-router-dom";
 import styled from "styled-components";
 import * as yup from "yup";
 import "../users/createuser.css";
+import StudentSuccessPage from "../pages/StudentSuccessPage";
 
 const TicketForm = () => {
   let history = useHistory();
@@ -68,11 +69,18 @@ const TicketForm = () => {
     setFormState(newFormData); // Update state with new data
   };
 
+  ///////////////////////////////////////
+  ///  Close Ticket -> Success Page  ///
+  /////////////////////////////////////
+  const toSuccessPage = () => {
+    history.push("/student-success");
+  };
+
   return (
     <BackgroundWrap>
       <form>
         <CloseButton
-          onClick={() => history.goBack()}
+          onClick={toSuccessPage}
           className="far fa-times-circle"
         ></CloseButton>
         <HeadingContainer>
@@ -109,7 +117,7 @@ const TicketForm = () => {
           ) : null}
         </label>
         <label htmlFor="aboutissue" className="required">
-          What is this issue about? *
+          Topic *
           <select id="aboutissue" name="aboutissue">
             <option>Select Issue</option>
             <option value="equipment">Equipment</option>
