@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import {
   BrowserRouter as Router,
   Route,
@@ -7,29 +7,58 @@ import {
   Switch,
 } from "react-router-dom";
 import * as yup from "yup";
-import axios from "axios";
 import styled from "styled-components";
 import CreateUserForm from "./CreateUserForm";
 import "./createuser.css";
+import { axiosWithAuth } from "../../auth/axiosWithAuth";
 
 /////////////////////////
 ///       FORM        ///
 /////////////////////////
 
-const Login = () => {
+const initialState = {
+  username: '',
+  password: ''
+}
+
+const Login = props => {
+  // Form State
+  const [credentials, setCredentials] = useState(initialState);
+
+  // Handler function for form changes
+  const handleChanges = e => {
+    setCredentials({...credentials, [e.target.name]: e.target.value});
+  }
+
+  // Function to post form data to API
+  const loginRequest = e => {
+    e.preventDefault();
+    axiosWithAuth()
+      .post('/users/login', credentials)
+      .then(res => {
+          console.log(res);
+          localStorage.setItem('token', res.data.token);
+          setCredentials(initialState);
+          props.history.push('/student-success');
+        }
+      )
+      .catch(err => console.log(err))
+  }
+
   return (
     <div className="create-account-form">
       <BackgroundWrap>
         <LoginHeading>LOGIN</LoginHeading>
-        <form>
-          <label htmlFor="email">
+        <form onSubmit={loginRequest}>
+          <label htmlFor="username">
             {/* EMAIL */}
             <input
               className="input"
-              id="email"
-              type="email"
-              name="email"
-              placeholder="Email"
+              id="username"
+              type="text"
+              name="username"
+              placeholder="Username"
+              onChange={handleChanges}
             />
           </label>
           <label htmlFor="password">
@@ -40,6 +69,7 @@ const Login = () => {
               type="password"
               name="password"
               placeholder="Password"
+              onChange={handleChanges}
             />
           </label>
           <button type="submit">LOG IN</button>

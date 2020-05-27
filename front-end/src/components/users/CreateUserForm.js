@@ -1,6 +1,5 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import * as yup from "yup";
-import axios from "axios";
 import styled from "styled-components";
 import {
   BrowserRouter as Router,
@@ -10,12 +9,43 @@ import {
   Switch,
 } from "react-router-dom";
 import "./createuser.css";
+import { axiosWithAuth } from "../../auth/axiosWithAuth";
 
 /////////////////////////
 ///       FORM        ///
 /////////////////////////
 
-const CreateUserForm = () => {
+// Form still needs validation.
+
+// Initial State
+const initialState = {
+  username: '',
+  password: '',
+  role: ''
+}
+
+const CreateUserForm = props => {
+  // Form State
+  const [toRegister, setToRegister] = useState(initialState);
+
+  // Handler function for form changes
+  const handleChanges = e => {
+    setToRegister({ ...toRegister, [e.target.name]: e.target.value });
+  }
+
+  // Function to post form data to API
+  const registerUser = e => {
+    e.preventDefault();
+    axiosWithAuth()
+      .post('/users/register', toRegister)
+      .then(res => {
+        console.log(res);
+        setToRegister(initialState);
+        props.history.push('/');
+      })
+      .catch(err => console.log(err));
+  }
+
   return (
     <div className="create-account-form">
       <BackgroundWrap>
@@ -23,20 +53,10 @@ const CreateUserForm = () => {
         <CreateAccountSubHeading>
           Create an account to start receiving help!
         </CreateAccountSubHeading>
-        <form>
-          <label htmlFor="name">
+        <form onSubmit={registerUser}>
+          <label htmlFor="username">
             {/* NAME */}
-            <input className="input" id="name" type="text" placeholder="Name" />
-          </label>
-          <label htmlFor="email">
-            {/* EMAIL */}
-            <input
-              className="input"
-              id="email"
-              type="email"
-              name="email"
-              placeholder="Email"
-            />
+            <input className="input" id="username" type="text" placeholder="Username" onChange={handleChanges} />
           </label>
           <label htmlFor="password">
             {/* PASSWORD */}
@@ -45,14 +65,15 @@ const CreateUserForm = () => {
               id="password"
               type="password"
               name="password"
-              placeholder="Password"
+              placeholder="Password" 
+              onChange={handleChanges}
             />
           </label>
           <label htmlFor="role" className="role">
             My Role:
-            <input type="checkbox" id="student" name="role" value="student" />
+            <input type="radio" id="student" name="role" value="student" onClick={handleChanges} />
             <label htmlFor="role">Student</label>
-            <input type="checkbox" id="helper" name="role" value="helper" />
+            <input type="radio" id="helper" name="role" value="helper" onClick={handleChanges} />
             <label htmlFor="role">Helper</label>
           </label>
           <button type="submit">Create Account</button>
