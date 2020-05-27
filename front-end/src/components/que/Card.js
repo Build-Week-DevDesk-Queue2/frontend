@@ -35,6 +35,7 @@ const CardWrap = styled.div`
   box-shadow: 2px 4px 10px rgba(0, 0, 0, 0.02), 2px 3px 8px rgba(0, 0, 0, 0.02);
   border-radius: 5px;
   border-left: 8px solid #007aff;
+  margin-top: 30px;
 `;
 
 const StyledCardTitle = styled.span`

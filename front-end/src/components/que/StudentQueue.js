@@ -16,7 +16,7 @@ import {
 } from "react-router-dom";
 
 const StudentQueue = () => {
-  let role = "student";
+  let role = "helper";
   let changeNav = () => {
     if (role == "student") {
       return <StudentNav />;

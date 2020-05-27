@@ -40,9 +40,9 @@
 #notes-medical {
   color: #0070eb;
   font-size: 74px;
-  position: relative;
-  top: 600px;
-  left: 150px;
+  position: absolute;
+  top: 750px;
+  left: 700px;
 }
 
 .error {
