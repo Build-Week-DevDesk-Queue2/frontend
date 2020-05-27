@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import * as yup from "yup";
 import axios from "axios";
 import styled from "styled-components";
@@ -16,6 +16,92 @@ import "./createuser.css";
 /////////////////////////
 
 const CreateUserForm = () => {
+  ////////////////////////
+  ///      STATE      ///
+  ///////////////////////
+
+  // Initial state for the Create User Form
+  const initialFormState = {
+    name: "",
+    email: "",
+    password: "",
+    roles: [],
+  };
+
+  // State for inputs
+  const [formState, setFormState] = useState(initialFormState);
+
+  // State for errors
+  const [errors, setErrors] = useState(initialFormState);
+
+  ////////////////////////
+  ///     VALIDATION   ///
+  ////////////////////////
+
+  // FORM SCHEMA Validation for Login Page
+  const formSchema = yup.object().shape({
+    name: yup.string().required("Name is a required field"),
+    email: yup.string().email("Must be a valid email address").required(),
+    password: yup.string().required("Password is a required field"),
+    roles: yup.string().required("Role is a required field"),
+  });
+
+  // Validation for each input
+  const validateChange = (e) => {
+    yup
+      // Read the value of schema key using name of input
+      .reach(formSchema, e.target.name)
+      // Validate the value of input
+      .validate(e.target.value)
+      // If the validation passes, clear all errors
+      .then((valid) => {
+        setErrors({ ...errors, [e.target.name]: "" });
+      })
+      .catch((err) => {
+        setErrors({ ...errors, [e.target.name]: err.errors[0] });
+      });
+  };
+
+  ////////////////////////
+  ///  INPUT ONCHANGE  ///
+  ////////////////////////
+  const inputChange = (e) => {
+    e.persist();
+    const newFormData = {
+      ...formState,
+      [e.target.name]: e.target.value,
+    };
+    validateChange(e); // Validates every change in every input
+    setFormState(newFormData); // Update state with new data
+  };
+
+  ////////////////////////
+  ///   ROLE ONCHANGE  ///
+  ////////////////////////
+
+  const inputChangeRole = (e) => {
+    let roles = formState.roles;
+    let role = e.target.name;
+    let selected = e.target.checked;
+    if (selected) {
+      roles.push(role);
+    } else {
+      let index = roles.indexOf(role);
+      roles.splice(index, 1);
+    }
+    e.persist();
+    const newFormData = {
+      ...formState,
+      ["roles"]: roles,
+    };
+    console.log(roles);
+    setFormState(newFormData);
+  };
+
+  ////////////////////////
+  ///     ON SUBMIT    ///
+  ////////////////////////
+
   return (
     <div className="create-account-form">
       <BackgroundWrap>
@@ -26,7 +112,18 @@ const CreateUserForm = () => {
         <form>
           <label htmlFor="name">
             {/* NAME */}
-            <input className="input" id="name" type="text" placeholder="Name" />
+            <input
+              className="input"
+              id="name"
+              type="text"
+              name="name"
+              placeholder="Name"
+              onChange={inputChange}
+              value={formSchema.name}
+            />
+            {errors.name.length > 0 ? (
+              <p className="error">{errors.name}</p>
+            ) : null}
           </label>
           <label htmlFor="email">
             {/* EMAIL */}
@@ -36,7 +133,12 @@ const CreateUserForm = () => {
               type="email"
               name="email"
               placeholder="Email"
+              onChange={inputChange}
+              value={formSchema.email}
             />
+            {errors.email.length > 0 ? (
+              <p className="error">{errors.email}</p>
+            ) : null}
           </label>
           <label htmlFor="password">
             {/* PASSWORD */}
@@ -46,14 +148,34 @@ const CreateUserForm = () => {
               type="password"
               name="password"
               placeholder="Password"
+              onChange={inputChange}
+              value={formSchema.password}
             />
+            {errors.password.length > 0 ? (
+              <p className="error">{errors.password}</p>
+            ) : null}
           </label>
           <label htmlFor="role" className="role">
             My Role:
-            <input type="checkbox" id="student" name="role" value="student" />
-            <label htmlFor="role">Student</label>
-            <input type="checkbox" id="helper" name="role" value="helper" />
-            <label htmlFor="role">Helper</label>
+            <input
+              type="checkbox"
+              id="student"
+              name="student"
+              value={formState.roles}
+              onChange={inputChangeRole}
+            />
+            <label htmlFor="student">Student</label>
+            <input
+              type="checkbox"
+              id="helper"
+              name="helper"
+              value={formState.roles}
+              onChange={inputChangeRole}
+            />
+            <label htmlFor="helper">Helper</label>
+            {errors.roles == [] ? (
+              <p className="error">{errors.roles}</p>
+            ) : null}
           </label>
           <button type="submit">Create Account</button>
           <h2>
