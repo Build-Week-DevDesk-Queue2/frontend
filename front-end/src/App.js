@@ -2,6 +2,17 @@ import React from "react";
 import "./App.css";
 import { LoginForm, CreateUserForm, StudentSuccessPage } from './components';
 import { Route, Redirect } from 'react-router-dom';
+import { connect } from 'react-redux';
+
+const mapStateToProps = state => {
+  return {
+    tickets: state.tickets,
+    user: {
+      username: state.user.username,
+      role: state.user.role
+    }
+  }
+}
 
 const PrivateRoute = ({ component: Component, ...rest }) => (
   <Route {...rest} render={props => localStorage.getItem('token') ? (
@@ -20,4 +31,4 @@ function App() {
     </div>
   );
 }
-export default App;
+export default connect(mapStateToProps, {})(App);
