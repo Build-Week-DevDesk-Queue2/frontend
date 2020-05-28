@@ -16,7 +16,7 @@ import { axiosWithAuth } from "../../auth/axiosWithAuth";
 ///       FORM        ///
 /////////////////////////
 
-const Login = () => {
+const Login = props => {
   ////////////////////////
   ///      STATE      ///
   ///////////////////////
@@ -80,7 +80,7 @@ const Login = () => {
     e.preventDefault();
     axiosWithAuth()
       .post('/users/login', formState)
-      .then(() => {
+      .then(res => {
           localStorage.setItem('token', res.data.token);
           props.history.push('/dashboard');
         }
