@@ -40,12 +40,13 @@
 #notes-medical {
   color: #0070eb;
   font-size: 74px;
-  position: relative;
-  top: 600px;
-  left: 150px;
 }
 
 .error {
   font-size: 1.2rem;
   color: red;
+}
+
+.hide {
+  display: none !important;
 }

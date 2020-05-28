@@ -17,6 +17,7 @@ const ClosedTicketWrap = styled.div`
   background: #fff;
   border-radius: 10px;
   width: 343px;
+  margin-top: 30px;
 `;
 
 const ClosedTicketTitle = styled.h3`

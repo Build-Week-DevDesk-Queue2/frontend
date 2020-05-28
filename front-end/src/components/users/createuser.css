@@ -205,3 +205,164 @@ div .open-ticket-info-section p {
   align-items: center;
   justify-content: space-between;
 }
+
+.success-message {
+  margin-top: 10px;
+  background-color: #0ea939;
+  width: 250px;
+  border-radius: 20px;
+  padding: 5px;
+  display: inline-block;
+  margin-bottom: 20px;
+}
+
+/*///////////STUDENT TICKET MANAGE BUTTON //////////////*/
+
+.dropdown,
+.dropleft,
+.dropright,
+.dropup {
+  position: relative;
+  text-align: right;
+  width: 20px;
+  margin-bottom: 4%;
+}
+
+.btn:not(:disabled):not(.disabled) {
+  cursor: pointer;
+}
+
+.btn-secondary:not(:disabled):not(.disabled).active:focus,
+.btn-secondary:not(:disabled):not(.disabled):active:focus,
+.show > .btn-secondary.dropdown-toggle:focus {
+  box-shadow: 0 0 0 0.2rem rgba(130, 138, 145, 0.5);
+}
+
+.btn-secondary:not(:disabled):not(.disabled).active,
+.btn-secondary:not(:disabled):not(.disabled):active,
+.show > .btn-secondary.dropdown-toggle {
+  color: #fff;
+  background-color: #545b62;
+  border-color: #4e555b;
+}
+
+.btn:not(:disabled):not(.disabled) {
+  cursor: pointer;
+}
+
+.dropdown-menu.show {
+  display: block;
+}
+
+.btn-secondary:hover {
+  color: #fff;
+  background-color: #5a6268;
+  border-color: #545b62;
+}
+
+.btn:hover {
+  color: #212529;
+  text-decoration: none;
+}
+
+button:hover {
+  background-image: none;
+  background-color: #d7d7d7;
+  box-shadow: 0 5px 12px rgba(0, 0, 0, 0.3);
+}
+
+.dropdown-toggle {
+  white-space: nowrap;
+  width: auto;
+  height: auto;
+}
+
+.dropdown-toggle::after {
+  display: inline-block;
+  margin-left: 0.255em;
+  vertical-align: 0.255em;
+  content: "";
+  border-top: 0.3em solid;
+  border-right: 0.3em solid transparent;
+  border-bottom: 0;
+  border-left: 0.3em solid transparent;
+}
+
+.dropdown-menu {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  z-index: 1000;
+  display: none;
+  float: left;
+  min-width: 10rem;
+  padding: 0.5rem 0;
+  margin: 0.125rem 0 0;
+  font-size: 1rem;
+  color: #212529;
+  text-align: left;
+  list-style: none;
+  background-color: #fff;
+  background-clip: padding-box;
+  border: 1px solid rgba(0, 0, 0, 0.15);
+  border-radius: 0.25rem;
+}
+
+[type="button"]:not(:disabled),
+[type="reset"]:not(:disabled),
+[type="submit"]:not(:disabled),
+button:not(:disabled) {
+  cursor: pointer;
+}
+
+.dropdown-item {
+  display: block;
+  width: 100%;
+  padding: 0.25rem 1.5rem;
+  clear: both;
+  font-weight: 400;
+  color: #212529;
+  text-align: inherit;
+  white-space: nowrap;
+  background-color: transparent;
+  border: 0;
+  margin: 0;
+  height: 35px;
+}
+
+[type="button"],
+[type="reset"],
+[type="submit"],
+button {
+  -webkit-appearance: button;
+}
+
+button,
+input {
+  overflow: visible;
+}
+
+.dropdown-toggle btn btn-secondary {
+  background-color: #6c767d;
+  color: white;
+  border-radius: 5px;
+}
+
+/*///////// CREATE TICKET ICON ///////////*/
+
+.create-ticket-icon {
+  position: fixed;
+  bottom: 40px;
+  right: 40px;
+}
+
+/**/
+.student-nav-container {
+  min-height: 100vh;
+}
+
+nav a.active {
+  background-image: none;
+  background-color: #d7d7d7;
+  box-shadow: 0 5px 12px rgba(0, 0, 0, 0.3);
+}
