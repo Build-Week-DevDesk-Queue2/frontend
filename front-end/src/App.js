@@ -10,7 +10,8 @@ const mapStateToProps = state => {
     user: {
       username: state.user.username,
       role: state.user.role
-    }
+    },
+    success: state.success
   }
 }
 

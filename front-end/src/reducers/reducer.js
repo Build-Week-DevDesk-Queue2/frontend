@@ -15,7 +15,8 @@ const initialState = {
     user: {
         username: '',
         role: ''
-    }
+    },
+    success: ''
 }
 
 export const reducer = (state = initialState, action) => {
