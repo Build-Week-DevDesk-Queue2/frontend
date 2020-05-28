@@ -15,7 +15,7 @@ import { axiosWithAuth } from "../../auth/axiosWithAuth";
 ///       FORM        ///
 /////////////////////////
 
-const CreateUserForm = () => {
+const CreateUserForm = props => {
   ////////////////////////
   ///      STATE      ///
   ///////////////////////
