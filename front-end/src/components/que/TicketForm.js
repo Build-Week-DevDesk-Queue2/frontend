@@ -103,7 +103,7 @@ const TicketForm = () => {
           ) : null}
         </label>
         <label htmlFor="issue" className="required">
-          What is this issue about? *
+          What is this issue about?
           <input
             className="input"
             id="issue"
@@ -117,7 +117,7 @@ const TicketForm = () => {
           ) : null}
         </label>
         <label htmlFor="aboutissue" className="required">
-          Topic *
+          Topic
           <select id="aboutissue" name="aboutissue">
             <option>Select Issue</option>
             <option value="equipment">Equipment</option>
@@ -131,7 +131,7 @@ const TicketForm = () => {
           ) : null}
         </label>
         <label htmlFor="effort">
-          What have you tried? *
+          What have you tried?
           <textarea
             className="input"
             id="effort"
@@ -146,7 +146,7 @@ const TicketForm = () => {
           ) : null}
         </label>
         <label htmlFor="info">
-          Anything else we should know? *
+          Anything else we should know?
           <textarea
             className="input"
             id="info"

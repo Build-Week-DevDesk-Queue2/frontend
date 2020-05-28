@@ -19,8 +19,11 @@ const Card = (props) => {
   const [dropdownOpen, setDropdownOpen] = useState(false);
   const toggle = () => setDropdownOpen((prevState) => !prevState);
 
+  let ticket = props.ticket;
+  console.log("Ticket in Card", ticket);
+
   let role = props.role;
-  console.log("Card", role);
+  console.log("Card", props);
 
   let changeDropdown = (role) => {
     if (role == "student") {
@@ -32,7 +35,7 @@ const Card = (props) => {
 
   let changeCard = (role) => {
     if (role == "student") {
-      return <StudentCard role={role} />;
+      return <StudentCard role={role} ticket={ticket} />;
     } else {
       return <HelperCard role={role} />;
     }

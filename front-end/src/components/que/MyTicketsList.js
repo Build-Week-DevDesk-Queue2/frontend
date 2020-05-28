@@ -2,6 +2,7 @@ import React from "react";
 import ClosedCard from "./ClosedCard";
 import styled from "styled-components";
 import MyTicketsCard from "./MyTicketsCard";
+import axios from "axios";
 
 const MyTicketsList = (props) => {
   let role = props.role;
