@@ -4,6 +4,7 @@ import styled from "styled-components";
 import TicketList from "./TicketList";
 import ClosedTickets from "./ClosedTickets";
 import TicketForm from "./TicketForm";
+import MyTicketsList from "./MyTicketsList";
 import SuccessMessage from "./SuccessMessage";
 import {
   BrowserRouter as Router,
@@ -23,7 +24,7 @@ const HelperNav = (props) => {
       <Router>
         <nav>
           <NavLink to="/dashboard/open-tickets">All Tickets</NavLink>
-          <NavLink to="/dashboard/closed-tickets">My Tickets</NavLink>
+          <NavLink to="/dashboard/my-tickets">My Tickets</NavLink>
         </nav>
         <Switch>
           <Route
@@ -37,8 +38,12 @@ const HelperNav = (props) => {
             path="/dashboard/open-tickets"
             render={(props) => <TicketList {...props} role={role} />}
           />
+          <Route
+            path="/dashboard/my-tickets"
+            render={(props) => <MyTicketsList {...props} role={role} />}
+          />
           <Route path="/dashboard/open-tickets" component={TicketList} />
-          <Route path="/dashboard/closed-tickets" component={ClosedTickets} />
+          <Route path="/dashboard/my-tickets" component={MyTicketsList} />
         </Switch>
       </Router>
     </div>

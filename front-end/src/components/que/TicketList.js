@@ -1,15 +1,18 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 import Card from "./Card";
+import axios from "axios";
+import tickets from "../../tickets";
 
 const OpenTickets = (props) => {
-  console.log("Ticket List", props);
+  const [ticket, setTicket] = useState(tickets);
+
+  console.log("Ticket List", ticket);
   return (
     <ListCard>
-      <Card role={props.role} />
-      <Card role={props.role} />
-      <Card role={props.role} />
-      <Card role={props.role} />
+      {ticket.map((ticket) => {
+        return <Card role={props.role} ticket={ticket} />;
+      })}
     </ListCard>
   );
 };

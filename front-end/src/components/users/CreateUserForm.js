@@ -15,7 +15,7 @@ import { axiosWithAuth } from "../../auth/axiosWithAuth";
 ///       FORM        ///
 /////////////////////////
 
-const CreateUserForm = props => {
+const CreateUserForm = (props) => {
   ////////////////////////
   ///      STATE      ///
   ///////////////////////
@@ -99,17 +99,17 @@ const CreateUserForm = props => {
   ////////////////////////
   ///     ON SUBMIT    ///
   ////////////////////////
-  
-const registerUser = e => {
+
+  const registerUser = (e) => {
     e.preventDefault();
     axiosWithAuth()
-      .post('/users/register', formState)
+      .post("/users/register", formState)
       .then(() => {
-        props.history.push('/');
+        props.history.push("/");
       })
-      .catch(err => console.log(err));
-  }
-  
+      .catch((err) => console.log(err));
+  };
+
   return (
     <div className="create-account-form">
       <BackgroundWrap>
@@ -117,6 +117,7 @@ const registerUser = e => {
         <CreateAccountSubHeading>
           Create an account to start receiving help!
         </CreateAccountSubHeading>
+
         <form onSubmit={registerUser}>
           <label htmlFor="username">
             {/* NAME */}

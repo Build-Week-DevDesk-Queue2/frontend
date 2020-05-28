@@ -9,25 +9,24 @@ import {
 import css from "../users/createuser.css";
 
 const StudentCard = (props) => {
+  let ticket = props.ticket;
+  console.log("StudentCardTicket", ticket);
+
   let role = props.role;
   console.log("StudentCard", props);
   return (
     <div>
-      <StyledCardTitle>Equipment Issue</StyledCardTitle>
-      <StyledParagraphTitle>Laptop stopped working</StyledParagraphTitle>
+      <StyledCardTitle>{ticket.title}</StyledCardTitle>
+      <StyledParagraphTitle>{ticket.issue}</StyledParagraphTitle>
       <div className="open-ticket-tried-section">
-        <h4>What you've tried</h4>
+        <h4>Effort</h4>
         <ul>
-          <li>Reboot</li>
-          <li>Apple Genius Bar</li>
+          <li>{ticket.effort}</li>
         </ul>
       </div>
       <div className="open-ticket-info-section">
         <h4>More Info</h4>
-        <p>
-          I took my laptop to the Apple Genius Bar and they weren't able to get
-          it to work. I don't have the money for a replacement right now.
-        </p>
+        <p>{ticket.info}</p>
       </div>
     </div>
   );
