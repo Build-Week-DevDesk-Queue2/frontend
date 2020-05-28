@@ -108,7 +108,7 @@ const CreateUserForm = () => {
           Create an account to start receiving help!
         </CreateAccountSubHeading>
         <form>
-          <label htmlFor="name">
+          <label htmlFor="username">
             {/* USERNAME */}
             <input
               className="input"
