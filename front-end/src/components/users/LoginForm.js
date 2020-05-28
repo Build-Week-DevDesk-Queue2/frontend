@@ -16,30 +16,73 @@ import { axiosWithAuth } from "../../auth/axiosWithAuth";
 ///       FORM        ///
 /////////////////////////
 
-const initialState = {
-  username: '',
-  password: ''
-}
+const Login = () => {
+  ////////////////////////
+  ///      STATE      ///
+  ///////////////////////
 
-const Login = props => {
-  // Form State
-  const [credentials, setCredentials] = useState(initialState);
+  // Initial state for the Login form
+  const initialFormState = {
+    email: "",
+    password: "",
+  };
 
-  // Handler function for form changes
-  const handleChanges = e => {
-    setCredentials({...credentials, [e.target.name]: e.target.value});
-  }
+  // State for inputs
+  const [formState, setFormState] = useState(initialFormState);
 
-  // Function to post form data to API
+  // State for errors
+  const [errors, setErrors] = useState(initialFormState);
+
+  ////////////////////////
+  ///     VALIDATION   ///
+  ////////////////////////
+
+  // FORM SCHEMA Validation for Login Page
+  const formSchema = yup.object().shape({
+    email: yup.string().email("Must be a valid email address").required(),
+    password: yup.string().required("Password is a required field"),
+  });
+
+  // Validation for each input
+  const validateChange = (e) => {
+    yup
+      // Read the value of schema key using name of input
+      .reach(formSchema, e.target.name)
+      // Validate the value of input
+      .validate(e.target.value)
+      // If the validation passes, clear all errors
+      .then((valid) => {
+        setErrors({ ...errors, [e.target.name]: "" });
+      })
+      .catch((err) => {
+        setErrors({ ...errors, [e.target.name]: err.errors[0] });
+      });
+  };
+
+  ////////////////////////
+  /// INPUT ONCHANGE   ///
+  ////////////////////////
+  const inputChange = (e) => {
+    e.persist();
+    const newFormData = {
+      ...formState,
+      [e.target.name]: e.target.value,
+    };
+    validateChange(e); // Validates every change in every input
+    setFormState(newFormData); // Update state with new data
+  };
+
+  ////////////////////////
+  ///     ON SUBMIT    ///
+  ////////////////////////
+
   const loginRequest = e => {
     e.preventDefault();
     axiosWithAuth()
-      .post('/users/login', credentials)
-      .then(res => {
-          console.log(res);
+      .post('/users/login', formState)
+      .then(() => {
           localStorage.setItem('token', res.data.token);
-          setCredentials(initialState);
-          props.history.push('/student-success');
+          props.history.push('/dashboard');
         }
       )
       .catch(err => console.log(err))
@@ -54,12 +97,16 @@ const Login = props => {
             {/* EMAIL */}
             <input
               className="input"
-              id="username"
-              type="text"
-              name="username"
-              placeholder="Username"
-              onChange={handleChanges}
+              id="email"
+              type="email"
+              name="email"
+              placeholder="Email"
+              onChange={inputChange}
+              value={formState.email}
             />
+            {errors.email.length > 0 ? (
+              <p className="error">{errors.email}</p>
+            ) : null}
           </label>
           <label htmlFor="password">
             {/* PASSWORD */}
@@ -69,8 +116,12 @@ const Login = props => {
               type="password"
               name="password"
               placeholder="Password"
-              onChange={handleChanges}
+              onChange={inputChange}
+              value={formState.password}
             />
+            {errors.password.length > 0 ? (
+              <p className="error">{errors.password}</p>
+            ) : null}
           </label>
           <button type="submit">LOG IN</button>
           <h2>

@@ -16,12 +16,8 @@ const ClosedCard = () => {
 const ClosedTicketWrap = styled.div`
   background: #fff;
   border-radius: 10px;
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  margin-top: 80px;
-  margin-left: -178px;
   width: 343px;
+  margin-top: 30px;
 `;
 
 const ClosedTicketTitle = styled.h3`

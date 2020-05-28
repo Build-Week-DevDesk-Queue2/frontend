@@ -1,22 +1,93 @@
-import React from "react";
+import React, { useState } from "react";
 import { useHistory } from "react-router-dom";
 import styled from "styled-components";
+import * as yup from "yup";
+import "../users/createuser.css";
+import StudentSuccessPage from "../pages/Dashboard";
 
 const TicketForm = () => {
   let history = useHistory();
+
+  ////////////////////////
+  ///      STATE      ///
+  ///////////////////////
+
+  // Initial state for the Create User Form
+  const initialFormState = {
+    title: "",
+    issue: "",
+    aboutissue: "",
+    effort: "",
+    info: "",
+  };
+
+  // State for inputs
+  const [formState, setFormState] = useState(initialFormState);
+
+  // State for errors
+  const [errors, setErrors] = useState(initialFormState);
+
+  ////////////////////////
+  ///     VALIDATION   ///
+  ////////////////////////
+
+  // FORM SCHEMA Validation for Ticket Form
+  const formSchema = yup.object().shape({
+    title: yup.string().required("This is a required field"),
+    issue: yup.string().required("This is a required field"),
+    aboutissue: yup.string().required("This is a required field"),
+    effort: yup.string().required("This is a required field"),
+    info: yup.string().required("This is a required field"),
+  });
+
+  // Validation for each input
+  const validateChange = (e) => {
+    yup
+      // Read the value of schema key using name of input
+      .reach(formSchema, e.target.name)
+      // Validate the value of input
+      .validate(e.target.value)
+      // If the validation passes, clear all errors
+      .then((valid) => {
+        setErrors({ ...errors, [e.target.name]: "" });
+      })
+      .catch((err) => {
+        setErrors({ ...errors, [e.target.name]: err.errors[0] });
+      });
+  };
+
+  ////////////////////////
+  ///  INPUT ONCHANGE  ///
+  ////////////////////////
+  const inputChange = (e) => {
+    e.persist();
+    const newFormData = {
+      ...formState,
+      [e.target.name]: e.target.value,
+    };
+    validateChange(e); // Validates every change in every input
+    setFormState(newFormData); // Update state with new data
+  };
+
+  ///////////////////////////////////////
+  ///  Close Ticket -> Success Page  ///
+  /////////////////////////////////////
+  const toSuccessPage = () => {
+    history.push("/dashboard");
+  };
 
   return (
     <BackgroundWrap>
       <form>
         <CloseButton
-          onClick={() => history.goBack()}
+          onClick={toSuccessPage}
           className="far fa-times-circle"
         ></CloseButton>
         <HeadingContainer>
           <TicketHeading>Let's submit a help ticket.</TicketHeading>
           <RequiredSpan>* Required Fields</RequiredSpan>
         </HeadingContainer>
-        <label htmlFor="title" class="required">
+        <label htmlFor="title" className="required">
           What's going on?
           <input
             className="input"
@@ -24,14 +95,29 @@ const TicketForm = () => {
             type="title"
             name="title"
             placeholder="Add a Title..."
+            onChange={inputChange}
+            value={formSchema.name}
           />
+          {errors.title.length > 0 ? (
+            <p className="error">{errors.title}</p>
+          ) : null}
         </label>
-        <label htmlFor="issue" class="required">
+        <label htmlFor="issue" className="required">
           What is this issue about? *
-          <input className="input" id="issue" type="issue" name="issue" />
+          <input
+            className="input"
+            id="issue"
+            type="issue"
+            name="issue"
+            onChange={inputChange}
+            value={formSchema.issue}
+          />
+          {errors.issue.length > 0 ? (
+            <p className="error">{errors.issue}</p>
+          ) : null}
         </label>
-        <label htmlFor="aboutissue" class="required">
-          What is this issue about? *
+        <label htmlFor="aboutissue" className="required">
+          Topic *
           <select id="aboutissue" name="aboutissue">
             <option>Select Issue</option>
             <option value="equipment">Equipment</option>
@@ -40,6 +126,9 @@ const TicketForm = () => {
             <option value="finances">Finances</option>
             <option value="Other">Other</option>
           </select>
+          {errors.aboutissue.length > 0 ? (
+            <p className="error">{errors.topic}</p>
+          ) : null}
         </label>
         <label htmlFor="effort">
           What have you tried? *
@@ -49,7 +138,12 @@ const TicketForm = () => {
             name="effort"
             rows="5"
             cols="40"
+            onChange={inputChange}
+            value={formSchema.effort}
           />
+          {errors.effort.length > 0 ? (
+            <p className="error">{errors.effort}</p>
+          ) : null}
         </label>
         <label htmlFor="info">
           Anything else we should know? *
@@ -59,7 +153,12 @@ const TicketForm = () => {
             name="info"
             rows="5"
             cols="40"
+            onChange={inputChange}
+            value={formSchema.info}
           />
+          {errors.info.length > 0 ? (
+            <p className="error">{errors.info}</p>
+          ) : null}
         </label>
         <button type="submit">SUBMIT TICKET</button>
       </form>

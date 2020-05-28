@@ -1,7 +1,7 @@
 import React from "react";
 import "./App.css";
-import { LoginForm, CreateUserForm, StudentSuccessPage } from './components';
-import { Route, Redirect } from 'react-router-dom';
+import { LoginForm, CreateUserForm, Dashboard } from "./components";
+import { Route, Redirect } from "react-router-dom";
 import { connect } from 'react-redux';
 
 const mapStateToProps = state => {
@@ -28,7 +28,7 @@ function App() {
     <div className="App">
       <Route exact path="/" component={LoginForm} />
       <Route path="/sign-up" component={CreateUserForm} />
-      <PrivateRoute path="/student-success" component={StudentSuccessPage} />
+      <Route path="/dashboard" component={Dashboard} />
     </div>
   );
 }

@@ -3,26 +3,22 @@ import styled from "styled-components";
 import "./studentqueue.css";
 import StudentQueue from "../que/StudentQueue";
 
-const StudentSuccessPage = () => {
+const Dashboard = () => {
+  let role = "student";
+
   return (
     <BackgroundWrap>
       <MyQueue>My Queue</MyQueue>
-      <StudentQueue />
+      <StudentQueue role={role} />
     </BackgroundWrap>
   );
 };
 
-export default StudentSuccessPage;
+export default Dashboard;
 
 const BackgroundWrap = styled.div`
   border-radius: 10px;
-  position: fixed;
-  top: 50%;
-  left: 50%;
-  margin-top: -460px;
-  margin-left: -600px;
-  width: 960px;
-  padding: 30px 130px 0px 120px;
+  background: #f9fafc;
 `;
 
 const MyQueue = styled.h1`

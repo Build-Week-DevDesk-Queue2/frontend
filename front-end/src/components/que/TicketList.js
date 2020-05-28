@@ -2,13 +2,23 @@ import React from "react";
 import styled from "styled-components";
 import Card from "./Card";
 
-const OpenTickets = () => {
+const OpenTickets = (props) => {
+  console.log("Ticket List", props);
   return (
-    <div>
-      <Card />
-    </div>
+    <ListCard>
+      <Card role={props.role} />
+      <Card role={props.role} />
+      <Card role={props.role} />
+      <Card role={props.role} />
+    </ListCard>
   );
 };
+
+const ListCard = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+`;
 
 const BackgroundWrap = styled.div`
   background: #fff;
