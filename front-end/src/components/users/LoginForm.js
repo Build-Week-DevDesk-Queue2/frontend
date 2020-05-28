@@ -7,10 +7,10 @@ import {
   Switch,
 } from "react-router-dom";
 import * as yup from "yup";
-import axios from "axios";
 import styled from "styled-components";
 import CreateUserForm from "./CreateUserForm";
 import "./createuser.css";
+import { axiosWithAuth } from "../../auth/axiosWithAuth";
 
 /////////////////////////
 ///       FORM        ///
@@ -76,12 +76,24 @@ const Login = () => {
   ///     ON SUBMIT    ///
   ////////////////////////
 
+  const loginRequest = e => {
+    e.preventDefault();
+    axiosWithAuth()
+      .post('/users/login', formState)
+      .then(() => {
+          localStorage.setItem('token', res.data.token);
+          props.history.push('/dashboard');
+        }
+      )
+      .catch(err => console.log(err))
+  }
+
   return (
     <div className="create-account-form">
       <BackgroundWrap>
         <LoginHeading>LOGIN</LoginHeading>
-        <form>
-          <label htmlFor="email">
+        <form onSubmit={loginRequest}>
+          <label htmlFor="username">
             {/* EMAIL */}
             <input
               className="input"

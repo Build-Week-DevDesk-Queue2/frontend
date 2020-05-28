@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import * as yup from "yup";
-import axios from "axios";
 import styled from "styled-components";
 import {
   BrowserRouter as Router,
@@ -10,6 +9,7 @@ import {
   Switch,
 } from "react-router-dom";
 import "./createuser.css";
+import { axiosWithAuth } from "../../auth/axiosWithAuth";
 
 /////////////////////////
 ///       FORM        ///
@@ -101,7 +101,17 @@ const CreateUserForm = () => {
   ////////////////////////
   ///     ON SUBMIT    ///
   ////////////////////////
-
+  
+const registerUser = e => {
+    e.preventDefault();
+    axiosWithAuth()
+      .post('/users/register', formState)
+      .then(() => {
+        props.history.push('/');
+      })
+      .catch(err => console.log(err));
+  }
+  
   return (
     <div className="create-account-form">
       <BackgroundWrap>
@@ -109,8 +119,8 @@ const CreateUserForm = () => {
         <CreateAccountSubHeading>
           Create an account to start receiving help!
         </CreateAccountSubHeading>
-        <form>
-          <label htmlFor="name">
+        <form onSubmit={registerUser}>
+          <label htmlFor="username">
             {/* NAME */}
             <input
               className="input"
