@@ -23,7 +23,7 @@ const Login = () => {
 
   // Initial state for the Login form
   const initialFormState = {
-    email: "",
+    username: "",
     password: "",
   };
 
@@ -39,7 +39,7 @@ const Login = () => {
 
   // FORM SCHEMA Validation for Login Page
   const formSchema = yup.object().shape({
-    email: yup.string().email("Must be a valid email address").required(),
+    username: yup.string().required("Username is a required field"),
     password: yup.string().required("Password is a required field"),
   });
 
@@ -81,19 +81,19 @@ const Login = () => {
       <BackgroundWrap>
         <LoginHeading>LOGIN</LoginHeading>
         <form>
-          <label htmlFor="email">
-            {/* EMAIL */}
+          <label htmlFor="username">
+            {/* USERNAME */}
             <input
               className="input"
-              id="email"
-              type="email"
-              name="email"
-              placeholder="Email"
+              id="username"
+              type="text"
+              name="username"
+              placeholder="Username"
               onChange={inputChange}
-              value={formState.email}
+              value={formState.username}
             />
-            {errors.email.length > 0 ? (
-              <p className="error">{errors.email}</p>
+            {errors.username.length > 0 ? (
+              <p className="error">{errors.username}</p>
             ) : null}
           </label>
           <label htmlFor="password">

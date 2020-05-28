@@ -22,10 +22,9 @@ const CreateUserForm = () => {
 
   // Initial state for the Create User Form
   const initialFormState = {
-    name: "",
-    email: "",
+    username: "",
     password: "",
-    roles: [],
+    role: "",
   };
 
   // State for inputs
@@ -40,10 +39,9 @@ const CreateUserForm = () => {
 
   // FORM SCHEMA Validation for Login Page
   const formSchema = yup.object().shape({
-    name: yup.string().required("Name is a required field"),
-    email: yup.string().email("Must be a valid email address").required(),
+    username: yup.string().required("Username is a required field"),
     password: yup.string().required("Password is a required field"),
-    roles: yup.string().required("Role is a required field"),
+    role: yup.string().required("Role is a required field"),
   });
 
   // Validation for each input
@@ -79,24 +77,24 @@ const CreateUserForm = () => {
   ///   ROLE ONCHANGE  ///
   ////////////////////////
 
-  const inputChangeRole = (e) => {
-    let roles = formState.roles;
-    let role = e.target.name;
-    let selected = e.target.checked;
-    if (selected) {
-      roles.push(role);
-    } else {
-      let index = roles.indexOf(role);
-      roles.splice(index, 1);
-    }
-    e.persist();
-    const newFormData = {
-      ...formState,
-      ["roles"]: roles,
-    };
-    console.log(roles);
-    setFormState(newFormData);
-  };
+  // const inputChangeRole = (e) => {
+  //   let roles = formState.roles;
+  //   let role = e.target.name;
+  //   let selected = e.target.checked;
+  //   if (selected) {
+  //     roles.push(role);
+  //   } else {
+  //     let index = roles.indexOf(role);
+  //     roles.splice(index, 1);
+  //   }
+  //   e.persist();
+  //   const newFormData = {
+  //     ...formState,
+  //     roles: roles,
+  //   };
+  //   console.log(roles);
+  //   setFormState(newFormData);
+  // };
 
   ////////////////////////
   ///     ON SUBMIT    ///
@@ -111,33 +109,18 @@ const CreateUserForm = () => {
         </CreateAccountSubHeading>
         <form>
           <label htmlFor="name">
-            {/* NAME */}
+            {/* USERNAME */}
             <input
               className="input"
-              id="name"
+              id="username"
               type="text"
-              name="name"
-              placeholder="Name"
+              name="username"
+              placeholder="Username"
               onChange={inputChange}
-              value={formSchema.name}
+              value={formSchema.username}
             />
-            {errors.name.length > 0 ? (
-              <p className="error">{errors.name}</p>
-            ) : null}
-          </label>
-          <label htmlFor="email">
-            {/* EMAIL */}
-            <input
-              className="input"
-              id="email"
-              type="email"
-              name="email"
-              placeholder="Email"
-              onChange={inputChange}
-              value={formSchema.email}
-            />
-            {errors.email.length > 0 ? (
-              <p className="error">{errors.email}</p>
+            {errors.username.length > 0 ? (
+              <p className="error">{errors.username}</p>
             ) : null}
           </label>
           <label htmlFor="password">
@@ -158,19 +141,21 @@ const CreateUserForm = () => {
           <label htmlFor="role" className="role">
             My Role:
             <input
-              type="checkbox"
+              type="radio"
               id="student"
-              name="student"
-              value={formState.roles}
-              onChange={inputChangeRole}
+              name="role"
+              value="student"
+              checked={formState.role == "student"}
+              onChange={inputChange}
             />
             <label htmlFor="student">Student</label>
             <input
-              type="checkbox"
+              type="radio"
               id="helper"
-              name="helper"
-              value={formState.roles}
-              onChange={inputChangeRole}
+              name="role"
+              value="helper"
+              checked={formState.role == "helper"}
+              onChange={inputChange}
             />
             <label htmlFor="helper">Helper</label>
             {errors.roles == [] ? (
