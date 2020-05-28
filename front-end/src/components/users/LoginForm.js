@@ -7,16 +7,16 @@ import {
   Switch,
 } from "react-router-dom";
 import * as yup from "yup";
-import axios from "axios";
 import styled from "styled-components";
 import CreateUserForm from "./CreateUserForm";
 import "./createuser.css";
+import { axiosWithAuth } from "../../auth/axiosWithAuth";
 
 /////////////////////////
 ///       FORM        ///
 /////////////////////////
 
-const Login = () => {
+const Login = props => {
   ////////////////////////
   ///      STATE      ///
   ///////////////////////
@@ -76,11 +76,23 @@ const Login = () => {
   ///     ON SUBMIT    ///
   ////////////////////////
 
+  const loginRequest = e => {
+    e.preventDefault();
+    axiosWithAuth()
+      .post('/users/login', formState)
+      .then(res => {
+          localStorage.setItem('token', res.data.token);
+          props.history.push('/dashboard');
+        }
+      )
+      .catch(err => console.log(err))
+  }
+
   return (
     <div className="create-account-form">
       <BackgroundWrap>
         <LoginHeading>LOGIN</LoginHeading>
-        <form>
+        <form onSubmit={loginRequest}>
           <label htmlFor="username">
             {/* USERNAME */}
             <input
