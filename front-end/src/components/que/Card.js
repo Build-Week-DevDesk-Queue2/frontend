@@ -1,27 +1,48 @@
-import React from "react";
+import React, { useState } from "react";
 import styled from "styled-components";
+import {
+  Dropdown,
+  DropdownToggle,
+  DropdownMenu,
+  DropdownItem,
+} from "reactstrap";
 import css from "../users/createuser.css";
+import StudentDropdown from "./StudentDropdown";
+import HelperDropdown from "./HelperDropdown";
+import StudentCard from "./StudentCard";
+import HelperCard from "./HelperCard";
 
-const Card = () => {
+const Card = (props) => {
+  ///////////////////////////////////////////
+  ///       STUDENT DROPDOWN STATE       ///
+  /////////////////////////////////////////
+  const [dropdownOpen, setDropdownOpen] = useState(false);
+  const toggle = () => setDropdownOpen((prevState) => !prevState);
+
+  let role = props.role;
+  console.log("Card", role);
+
+  let changeDropdown = (role) => {
+    if (role == "student") {
+      return <StudentDropdown />;
+    } else {
+      return <HelperDropdown />;
+    }
+  };
+
+  let changeCard = (role) => {
+    if (role == "student") {
+      return <StudentCard role={role} />;
+    } else {
+      return <HelperCard role={role} />;
+    }
+  };
+
   return (
     <CardWrap>
       <div className="ticket-card">
-        <StyledCardTitle>Equipment Issue</StyledCardTitle>
-        <StyledParagraphTitle>Laptop stopped working</StyledParagraphTitle>
-        <div className="open-ticket-tried-section">
-          <h4>What you've tried</h4>
-          <ul>
-            <li>Reboot</li>
-            <li>Apple Genius Bar</li>
-          </ul>
-        </div>
-        <div className="open-ticket-info-section">
-          <h4>More Info</h4>
-          <p>
-            I took my laptop to the Apple Genius Bar and they weren't able to
-            get it to work. I don't have the money for a replacement right now.
-          </p>
-        </div>
+        {changeDropdown(role)}
+        {changeCard(role)}
       </div>
     </CardWrap>
   );
@@ -48,6 +69,11 @@ const StyledParagraphTitle = styled.p`
   font-size: 21px;
   line-height: 26px;
   margin-top: 0;
+`;
+
+const DropDownButton = styled.button`
+  background-color: #6c767d;
+  color: white;
 `;
 
 export default Card;

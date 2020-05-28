@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import axios from "axios";
 import styled from "styled-components";
-import OpenTickets from "./OpenTickets";
+import TicketList from "./TicketList";
 import ClosedTickets from "./ClosedTickets";
 import TicketForm from "./TicketForm";
 import SuccessMessage from "./SuccessMessage";
@@ -11,24 +11,38 @@ import {
   Link,
   NavLink,
   Switch,
+  Redirect,
 } from "react-router-dom";
+import OpenTickets from "./TicketList";
 
-const StudentNav = () => {
+const StudentNav = (props) => {
+  console.log("Student Nav", props);
+  let role = props.role;
   return (
-    <div>
-      <SuccessMessage />
+    <div className="student-nav-container">
+      <SuccessMessage timeout="5000" />
       <Router>
-        <nav>
-          <NavLink to="/open-tickets">Open Tickets</NavLink>
-          <NavLink to="/closed-tickets">Closed Tickets</NavLink>
-        </nav>
-        <NavLink to="/create-ticket">
+        <NavLink className="create-ticket-icon" to="/dashboard/create-ticket">
           <i className="fas fa-notes-medical" id="notes-medical"></i>
         </NavLink>
+        <nav>
+          <NavLink to="/dashboard/open-tickets">Open Tickets</NavLink>
+          <NavLink to="/dashboard/closed-tickets">Closed Tickets</NavLink>
+        </nav>
         <Switch>
-          <Route path="/open-tickets" component={OpenTickets} />
-          <Route path="/closed-tickets" component={ClosedTickets} />
-          <Route path="/create-ticket" component={TicketForm} />
+          <Route
+            exact
+            path="/dashboard"
+            render={() => {
+              return <Redirect to="/dashboard/open-tickets" />;
+            }}
+          />
+          <Route
+            path="/dashboard/open-tickets"
+            render={(props) => <TicketList {...props} role={role} />}
+          />
+          <Route path="/dashboard/closed-tickets" component={ClosedTickets} />
+          <Route path="/dashboard/create-ticket" component={TicketForm} />
         </Switch>
       </Router>
     </div>

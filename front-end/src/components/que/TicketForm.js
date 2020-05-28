@@ -3,7 +3,7 @@ import { useHistory } from "react-router-dom";
 import styled from "styled-components";
 import * as yup from "yup";
 import "../users/createuser.css";
-import StudentSuccessPage from "../pages/StudentSuccessPage";
+import StudentSuccessPage from "../pages/Dashboard";
 
 const TicketForm = () => {
   let history = useHistory();
@@ -73,7 +73,7 @@ const TicketForm = () => {
   ///  Close Ticket -> Success Page  ///
   /////////////////////////////////////
   const toSuccessPage = () => {
-    history.push("/student-success");
+    history.push("/dashboard");
   };
 
   return (
@@ -127,7 +127,7 @@ const TicketForm = () => {
             <option value="Other">Other</option>
           </select>
           {errors.aboutissue.length > 0 ? (
-            <p className="error">{errors.aboutissue}</p>
+            <p className="error">{errors.topic}</p>
           ) : null}
         </label>
         <label htmlFor="effort">

@@ -1,13 +1,22 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { Toast, ToastBody, ToastHeader } from "reactstrap";
 import styled from "styled-components";
 import "../users/createuser.css";
 
-const SuccessMessage = () => {
+const SuccessMessage = (props) => {
   let role = "helper";
 
+  const [hide, setHide] = useState(false);
+
+  useEffect(() => {
+    setTimeout(function () {
+      setHide(true);
+    }, props.timeout);
+  });
+
+  let className = "success-message";
   return (
-    <div className="success-message">
+    <div className={`${hide ? "hide" : null} ${className}`}>
       <Toast>
         <ToastHeader>Success!</ToastHeader>
         <ToastBody>You have successfully logged in as a {role}</ToastBody>

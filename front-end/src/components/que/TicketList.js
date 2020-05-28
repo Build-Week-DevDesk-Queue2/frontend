@@ -2,10 +2,14 @@ import React from "react";
 import styled from "styled-components";
 import Card from "./Card";
 
-const OpenTickets = () => {
+const OpenTickets = (props) => {
+  console.log("Ticket List", props);
   return (
     <ListCard>
-      <Card />
+      <Card role={props.role} />
+      <Card role={props.role} />
+      <Card role={props.role} />
+      <Card role={props.role} />
     </ListCard>
   );
 };
