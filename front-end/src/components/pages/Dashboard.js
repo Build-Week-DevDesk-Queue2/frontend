@@ -4,7 +4,7 @@ import "./studentqueue.css";
 import StudentQueue from "../que/StudentQueue";
 
 const Dashboard = () => {
-  let role = "student";
+  let role = "helper";
 
   return (
     <BackgroundWrap>

@@ -20,7 +20,8 @@ form {
 
 nav a {
   display: inline-block;
-  width: 50%;
+  width: 45%;
+  border-radius: 5px;
   text-decoration: none;
   background: #f9fafc;
   color: black;

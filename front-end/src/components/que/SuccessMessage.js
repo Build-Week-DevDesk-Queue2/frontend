@@ -4,7 +4,7 @@ import styled from "styled-components";
 import "../users/createuser.css";
 
 const SuccessMessage = (props) => {
-  let role = "helper";
+  let role = "student";
 
   const [hide, setHide] = useState(false);
 
