@@ -16,7 +16,7 @@ import {
 } from "react-router-dom";
 
 const StudentQueue = (props) => {
-  console.log("Student Queue", props);
+  //console.log("Student Queue", props);
 
   let changeNav = (role) => {
     if (role == "student") {

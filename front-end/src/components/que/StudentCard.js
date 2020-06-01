@@ -10,10 +10,10 @@ import css from "../users/createuser.css";
 
 const StudentCard = (props) => {
   let ticket = props.ticket;
-  console.log("StudentCardTicket", ticket);
+  //console.log("StudentCardTicket", ticket);
 
   let role = props.role;
-  console.log("StudentCard", props);
+  //console.log("StudentCard", props);
   return (
     <div>
       <StyledCardTitle>{ticket.title}</StyledCardTitle>
