@@ -10,13 +10,25 @@ import * as yup from "yup";
 import styled from "styled-components";
 import CreateUserForm from "./CreateUserForm";
 import "./createuser.css";
-import { axiosWithAuth } from "../../auth/axiosWithAuth";
+import { connect } from 'react-redux';
+import { login } from '../../actions/actions';
+
+const mapStateToProps = state => {
+  return {
+    error: state.error,
+    logged_in: state.logged_in,
+    success: state.success
+  }
+}
 
 /////////////////////////
 ///       FORM        ///
 /////////////////////////
 
 const Login = props => {
+  if (props.logged_in) {
+    props.history.push('/dashboard');
+  }
   ////////////////////////
   ///      STATE      ///
   ///////////////////////
@@ -78,14 +90,7 @@ const Login = props => {
 
   const loginRequest = e => {
     e.preventDefault();
-    axiosWithAuth()
-      .post('/users/login', formState)
-      .then(res => {
-          localStorage.setItem('token', res.data.token);
-          props.history.push('/dashboard');
-        }
-      )
-      .catch(err => console.log(err))
+    props.login(formState);
   }
 
   return (
@@ -122,6 +127,8 @@ const Login = props => {
             {errors.password.length > 0 ? (
               <p className="error">{errors.password}</p>
             ) : null}
+            {props.error.length > 0 && props.success.length < 1 ? <p className="error">{props.error}</p> : null}
+            {props.success.length > 0 ? <p className="error">{props.success}</p> : null}
           </label>
           <button type="submit">LOG IN</button>
           <h2>
@@ -185,4 +192,15 @@ const StyledLink = styled(Link)`
   text-decoration: none;
 `;
 
-export default Login;
+export default connect(mapStateToProps, {login})(Login);
+
+
+   // axiosWithAuth()
+    //   .post('/login', formState)
+    //   .then(res => {
+    //       console.log(res);
+    //       localStorage.setItem('token', res.data.token);
+    //       props.history.push('/dashboard');
+    //     }
+    //   )
+    //   .catch(err => console.log(err))

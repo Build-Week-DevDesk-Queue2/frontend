@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import * as yup from "yup";
 import styled from "styled-components";
 import {
@@ -10,12 +10,25 @@ import {
 } from "react-router-dom";
 import "./createuser.css";
 import { axiosWithAuth } from "../../auth/axiosWithAuth";
+import { connect } from 'react-redux';
+import { registerUser } from '../../actions/actions';
+
+const mapStateToProps = state => {
+  return { 
+    success: state.success
+  }
+}
 
 /////////////////////////
 ///       FORM        ///
 /////////////////////////
 
 const CreateUserForm = (props) => {
+  useEffect(() => {
+    if (props.success) {
+      props.history.push('dashboard');
+    }
+  }, [props.success])
   ////////////////////////
   ///      STATE      ///
   ///////////////////////
@@ -102,12 +115,7 @@ const CreateUserForm = (props) => {
 
   const registerUser = (e) => {
     e.preventDefault();
-    axiosWithAuth()
-      .post("/users/register", formState)
-      .then(() => {
-        props.history.push("/");
-      })
-      .catch((err) => console.log(err));
+    props.registerUser(formState);
   };
 
   return (
@@ -156,7 +164,7 @@ const CreateUserForm = (props) => {
               id="student"
               name="role"
               value="student"
-              checked={formState.role == "student"}
+              checked={formState.role === "student"}
               onChange={inputChange}
             />
             <label htmlFor="student">Student</label>
@@ -165,11 +173,11 @@ const CreateUserForm = (props) => {
               id="helper"
               name="role"
               value="helper"
-              checked={formState.role == "helper"}
+              checked={formState.role === "helper"}
               onChange={inputChange}
             />
             <label htmlFor="helper">Helper</label>
-            {errors.roles == [] ? (
+            {errors.roles === [] ? (
               <p className="error">{errors.roles}</p>
             ) : null}
           </label>
@@ -242,4 +250,4 @@ const StyledLink = styled(Link)`
   text-decoration: none;
 `;
 
-export default CreateUserForm;
+export default connect(mapStateToProps, {registerUser})(CreateUserForm);

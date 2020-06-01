@@ -2,20 +2,40 @@ import React from "react";
 import styled from "styled-components";
 import "./studentqueue.css";
 import StudentQueue from "../que/StudentQueue";
+import { connect } from 'react-redux';
+import { logOut } from '../../actions/actions';
 
-const Dashboard = () => {
-  let role = "student";
+const mapStateToProps = state => {
+  console.log(state);
+  return {
+    user: {
+      id: state.user.id,
+      username: state.user.username,
+      role: state.user.role
+    },
+    logged_in: state.logged_in
+  }
+}
+
+const Dashboard = props => {
+  let role = props.user.role;
+
+  const logout = () => {
+    props.logOut();
+    props.history.push('/');
+  }
 
   return (
     <BackgroundWrap>
-      <LogoutButton>LOGOUT</LogoutButton>
+      <LogoutButton onClick={logout}>LOGOUT</LogoutButton>
+      <p>{role}</p>
       <MyQueue>My Queue</MyQueue>
       <StudentQueue role={role} />
     </BackgroundWrap>
   );
 };
 
-export default Dashboard;
+export default connect(mapStateToProps, {logOut})(Dashboard);
 
 const BackgroundWrap = styled.div`
   border-radius: 10px;

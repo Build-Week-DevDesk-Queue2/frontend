@@ -16,7 +16,7 @@ import {
 import OpenTickets from "./TicketList";
 
 const StudentNav = (props) => {
-  console.log("Student Nav", props);
+  //console.log("Student Nav", props);
   let role = props.role;
   return (
     <div className="student-nav-container">

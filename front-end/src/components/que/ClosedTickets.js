@@ -1,11 +1,20 @@
 import React from "react";
 import ClosedCard from "./ClosedCard";
 import styled from "styled-components";
+import { connect } from 'react-redux';
 
-const ClosedTickets = () => {
+const mapStateToPtops = state => {
+  return {
+    tickets: state.tickets
+  }
+}
+
+const ClosedTickets = props => {
   return (
     <ListCard>
-      <ClosedCard />
+      {props.tickets.filter(ticket => ticket.completed).map(ticket => {
+        return <ClosedCard role={props.role} ticket={ticket} key={ticket.id} />;
+      })}
     </ListCard>
   );
 };
@@ -16,4 +25,4 @@ const ListCard = styled.div`
   align-items: center;
 `;
 
-export default ClosedTickets;
+export default connect(mapStateToPtops, {})(ClosedTickets);
