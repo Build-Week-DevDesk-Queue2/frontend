@@ -4,8 +4,10 @@ import styled from "styled-components";
 import * as yup from "yup";
 import "../users/createuser.css";
 import StudentSuccessPage from "../pages/Dashboard";
+import { connect } from 'react-redux';
+import { postTicket } from '../../actions/actions';
 
-const TicketForm = () => {
+const TicketForm = props => {
   let history = useHistory();
 
   ////////////////////////
@@ -15,10 +17,9 @@ const TicketForm = () => {
   // Initial state for the Create User Form
   const initialFormState = {
     title: "",
-    issue: "",
-    aboutissue: "",
-    effort: "",
-    info: "",
+    category: "",
+    tried: "",
+    additional_info: "",
   };
 
   // State for inputs
@@ -34,10 +35,9 @@ const TicketForm = () => {
   // FORM SCHEMA Validation for Ticket Form
   const formSchema = yup.object().shape({
     title: yup.string().required("This is a required field"),
-    issue: yup.string().required("This is a required field"),
-    aboutissue: yup.string().required("This is a required field"),
-    effort: yup.string().required("This is a required field"),
-    info: yup.string().required("This is a required field"),
+    category: yup.string().required("This is a required field"),
+    tried: yup.string().required("This is a required field"),
+    additional_info: yup.string().required("This is a required field"),
   });
 
   // Validation for each input
@@ -55,6 +55,13 @@ const TicketForm = () => {
         setErrors({ ...errors, [e.target.name]: err.errors[0] });
       });
   };
+
+  // onsubmit functino
+  const submitTicket = e => {
+    e.preventDefault();
+    props.postTicket(formState);
+    toSuccessPage();
+  }
 
   ////////////////////////
   ///  INPUT ONCHANGE  ///
@@ -78,7 +85,7 @@ const TicketForm = () => {
 
   return (
     <BackgroundWrap>
-      <form>
+      <form onSubmit={submitTicket}>
         <CloseButton
           onClick={toSuccessPage}
           className="far fa-times-circle"
@@ -88,7 +95,7 @@ const TicketForm = () => {
           <RequiredSpan>* Required Fields</RequiredSpan>
         </HeadingContainer>
         <label htmlFor="title" className="required">
-          What's going on?
+          Title
           <input
             className="input"
             id="title"
@@ -102,61 +109,47 @@ const TicketForm = () => {
             <p className="error">{errors.title}</p>
           ) : null}
         </label>
-        <label htmlFor="issue" className="required">
-          What is this issue about?
-          <input
-            className="input"
-            id="issue"
-            type="issue"
-            name="issue"
-            onChange={inputChange}
-            value={formSchema.issue}
-          />
-          {errors.issue.length > 0 ? (
-            <p className="error">{errors.issue}</p>
-          ) : null}
-        </label>
-        <label htmlFor="aboutissue" className="required">
+        <label htmlFor="category" className="required">
           Topic
-          <select id="aboutissue" name="aboutissue">
-            <option>Select Issue</option>
+          <select id="category" name="category">
+            <option>Select Category</option>
             <option value="equipment">Equipment</option>
             <option value="people">People</option>
             <option value="track">Track</option>
             <option value="finances">Finances</option>
             <option value="Other">Other</option>
           </select>
-          {errors.aboutissue.length > 0 ? (
-            <p className="error">{errors.topic}</p>
+          {errors.category.length > 0 ? (
+            <p className="error">{errors.category}</p>
           ) : null}
         </label>
-        <label htmlFor="effort">
+        <label htmlFor="tried">
           What have you tried?
           <textarea
             className="input"
-            id="effort"
-            name="effort"
+            id="tried"
+            name="tried"
             rows="5"
             cols="40"
             onChange={inputChange}
             value={formSchema.effort}
           />
-          {errors.effort.length > 0 ? (
-            <p className="error">{errors.effort}</p>
+          {errors.tried.length > 0 ? (
+            <p className="error">{errors.tried}</p>
           ) : null}
         </label>
-        <label htmlFor="info">
+        <label htmlFor="additional_info">
           Anything else we should know?
           <textarea
             className="input"
-            id="info"
-            name="info"
+            id="additional_info"
+            name="additional_info"
             rows="5"
             cols="40"
             onChange={inputChange}
             value={formSchema.info}
           />
-          {errors.info.length > 0 ? (
+          {errors.additional_info.length > 0 ? (
             <p className="error">{errors.info}</p>
           ) : null}
         </label>
@@ -199,4 +192,4 @@ const CloseButton = styled.i`
   font-size: 18px;
 `;
 
-export default TicketForm;
+export default connect(null, {postTicket})(TicketForm);

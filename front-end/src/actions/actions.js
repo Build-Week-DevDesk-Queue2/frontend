@@ -81,11 +81,13 @@ export const getHelperTickets = () => dispatch => {
 export const postTicket = ticket => dispatch => {
     dispatch({ type: POST_TICKET_START });
     axiosWithAuth()
-        .post('')
+        .post('/students/tickets', ticket)
         .then(res => {
+            console.log(res);
             dispatch({ type: POST_TICKET_SUCCESS, payload: res });
         })
         .catch(err => {
+            console.log(err);
             dispatch({ type: POST_TICKET_FAIL, payload: err });
         });
 }
