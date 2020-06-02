@@ -100,11 +100,23 @@ export const reducer = (state = initialState, action) => {
                 error: 'Failed to fetch tickets'
             }
         case POST_TICKET_START:
-            return state;
+            return {
+                ...state,
+                posting_ticket: true,
+                error: ''
+            }
         case POST_TICKET_SUCCESS:
-            return state;
+            return {
+                ...state,
+                posting_ticket: false,
+                error: ''
+            }
         case POST_TICKET_FAIL:
-            return state;
+            return {
+                ...state,
+                posting_ticket: false,
+                error: 'Ticket Failed to post'
+            }
         default:
             return state;
     }
