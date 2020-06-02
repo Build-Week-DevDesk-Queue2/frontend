@@ -27,7 +27,8 @@ const initialState = {
     posting_ticket: false,
     error: '',
     logged_in: false,
-    success: ''
+    success: '',
+    update_tickets: true
 }
 
 export const reducer = (state = initialState, action) => {
